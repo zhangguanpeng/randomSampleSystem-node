@@ -17,12 +17,9 @@ $(document).ready(function() {
 
 	function getData(dataSourceName) {
 		$.ajax({
-			url: 'http://127.0.0.1:8888/',
-			type: 'POST',
-			dataType: 'JSON',
-			data:{
-				name:dataSourceName
-			},
+			url: 'http://127.0.0.1:8081/',
+			type: 'GET',
+			//dataType: 'JSON',
 			success: function(data) {
 				console.log(data);
 				$("#content").empty();
