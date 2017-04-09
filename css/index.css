@@ -1,0 +1,200 @@
+html, body{
+	height: 100%;
+}
+ul, li{
+	padding: 0;
+	margin: 0;
+}
+
+.navbar-header .navbar-brand{
+	color: #ffffff;
+}
+
+@media (min-width: 768px){
+	.navbar-border{
+		border-radius:0px;
+	}
+}
+
+
+/*页面主体部分*/
+.main-container{
+	width: 100%;
+	/*position: relative;*/
+	height: 100%;
+	margin-top: -20px;
+}
+
+/*左侧导航条*/
+.sidebar{
+	width: 190px;
+	background-color: #f2f2f2;
+	float: left;
+	height: 100%;
+	border-right: 1px solid #ccc;
+}
+.sidebar-title{
+	height: 40px;
+	line-height: 40px;
+	background-color: #F8F8FF;
+	border-bottom: 1px solid #ccc;
+	text-align: center;
+	font-family: "微软雅黑";
+}
+.sidebar li{
+	line-height: 40px;
+	border-bottom: 1px solid #DCDCDC;
+	display: block;
+	position: relative;
+}
+.sidebar li span{
+	color: #000;
+	padding-left: 10px;
+}
+.sidebar li a{
+	color: #000000;
+	font-family: "微软雅黑";
+	display: inline-block;
+	padding: 0px 0px 0px 10px;
+	width: 100%;
+}
+.sidebar li b{
+	position: absolute;
+	right: 13px;
+	top: 10px;
+}
+
+/*二级导航菜单*/
+.nav-list>li .submenu{
+	background-color: white;
+	overflow: hidden;
+	position: relative;
+	display: none;
+}
+
+.nav-list>li .submenu:before{
+	content: "";
+	display: block;
+	position: absolute;
+	border: 1px dotted #9dbdd6; 
+	z-index: 1;
+	left: 15px;
+	height: 100%;
+}
+
+.nav-list>li .submenu li{
+	padding-left: 19px;
+}
+
+.nav-list>li .submenu li:before{
+	content: "";
+	display: block;
+	position: absolute;
+	border-top: 1px solid #9dbdd6; 
+	z-index: 1;
+	left: 17px;
+	top: 19px;
+	width: 7px;
+}
+
+/*右侧内容主体*/
+.main-content{
+	border: 1px solid #ccc;
+	height: 500px;
+	margin-left: 190px;
+}
+
+.content-title{
+	height: 40px;
+	background-color: #f2f2f2;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid white;
+	padding-left: 10px;
+}
+.content-title ul{
+	list-style: none;
+}
+.content-title li{
+	height: 40px;
+	line-height: 40px;
+}
+.home-title{
+	color: #4169E1;
+	font-family: '微软雅黑';
+}
+
+.content-title li a{
+	color: gray;
+	font-family: '微软雅黑';
+}
+
+.select_area{
+	height: 70px;
+	font-family: '微软雅黑';
+	border-bottom: 1px solid #ccc;
+}
+
+.select_area p{
+	float: left;
+	margin-top: 13px;
+}
+
+.select_area select{
+	float: left;
+	margin-top: 12px;
+	height: 25px;
+	border-radius: 3px;
+}
+
+.select_area label{
+	font-weight: normal;
+	font-family: '微软雅黑';
+	margin-top: 13px;
+}
+
+.select_area button{
+	height: 28px;
+	margin-top: 11px;
+	width: 50%;
+}
+
+.select_area .col-md-3{
+		padding-right: 0px;
+		position: relative;
+	}
+
+@media(min-width: 768px) {
+	.select_area .form-group input{
+		height: 25px;
+		width: 50%;
+	}
+
+	.select_area select{
+		/*width: 140px;*/
+		width: 50%;
+	}
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+	
+	.select_area .form-group input{
+		height: 25px;
+		width: 50%;
+	}
+
+	.select_area select{
+		width: 140px;
+	}
+}
+
+@media(min-width: 1200px) {
+
+	.select_area .form-group input{
+		height: 25px;
+		width: 160px;
+	}
+
+	.select_area select{
+		width: 150px;
+	}
+}
