@@ -9,21 +9,23 @@ var str='{"id":"123",name:"jack",arg:11111}';
 
 app.get('/', function (req, res) {
     //res.send('Hello GET');
-    var dataList = xlsx.parse("./data/testData.xlsx");
-    console.log(dataList);
-    /*var dataArray = [];
-    for(var i= 0;i<dataList.length;i++) {
+    var dataArray = xlsx.parse("./data/testData.xlsx");
+    //取sheet1中的数据，list是一个二维数组
+    var list = dataArray[0].data;
+    var responseData = [];
+    for(var i= 1;i<list.length;i++) {
+        //console.log(list[i]);
         var rowObj = {};
-        rowObj.name = dataList[i][0];
-        rowObj.department = dataList[i][1];
-        rowObj.specialty = dataList[i][2];
-        rowObj.jobTitle = dataList[i][3];
-        dataArray.push(rowObj);
-    }*/
+        rowObj.name = list[i][0];
+        rowObj.department = list[i][1];
+        rowObj.specialty = list[i][2];
+        rowObj.jobTitle = list[i][3];
+        responseData.push(rowObj);
+    }
     res.writeHead(200,{"Content-Type":'application/json','Access-Control-Allow-Origin':'*','Access-Control-Allow-Methods':'PUT,POST,GET,DELETE,OPTIONS'});
 
     //res.json({data: dataList});
-    res.end(JSON.stringify(dataList));
+    res.end(JSON.stringify(responseData));
  
 });
 

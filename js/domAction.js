@@ -1,10 +1,14 @@
 $(document).ready(function() {
+	//设置内容区域高度
+	$(".main-container").height($(window).height() - 55);
+
+
 	$(".nav-list .submenu").on('click', 'a', function(){
 		//alert($(this).text());
 		var clickOption = $(this).text();
 		switch (clickOption) {
 			case "文艺演出":
-				alert("文艺演出");
+				//alert("文艺演出");
 				getData("文艺演出");
 				break;
 			case "新闻出版":

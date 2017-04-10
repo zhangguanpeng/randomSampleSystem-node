@@ -21,7 +21,7 @@ ul, li{
 .main-container{
 	width: 100%;
 	/*position: relative;*/
-	height: 100%;
+	/*height: 100%;*/
 	margin-top: -20px;
 }
 
@@ -99,8 +99,8 @@ ul, li{
 
 /*右侧内容主体*/
 .main-content{
-	border: 1px solid #ccc;
-	height: 500px;
+	/*border: 1px solid #ccc;*/
+	height: 100%;
 	margin-left: 190px;
 }
 
@@ -125,6 +125,32 @@ ul, li{
 
 .content-title li a{
 	color: gray;
+	font-family: '微软雅黑';
+}
+
+.dataArea{
+	width: 49%;
+	/*height: 100%;*/
+	border: 1px solid #ccc;
+	float: left;
+}
+.resultArea{
+	width: 49%;
+	/*height: 100%;*/
+	border: 1px solid #ccc;
+	float: right;
+}
+
+.data-title{
+	height: 35px;
+	line-height: 35px;
+	font-family: '微软雅黑';
+	padding-left: 10px;
+}
+
+.search-title{
+	height: 35px;
+	line-height: 35px;
 	font-family: '微软雅黑';
 }
 
