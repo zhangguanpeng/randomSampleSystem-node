@@ -133,19 +133,20 @@ ul, li{
 	/*height: 100%;*/
 	border: 1px solid #ccc;
 	float: left;
+	padding: 5px;
 }
 .resultArea{
 	width: 49%;
 	/*height: 100%;*/
 	border: 1px solid #ccc;
 	float: right;
+	padding: 5px;
 }
 
 .data-title{
 	height: 35px;
 	line-height: 35px;
 	font-family: '微软雅黑';
-	padding-left: 10px;
 }
 
 .search-title{

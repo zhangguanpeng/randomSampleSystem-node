@@ -5,11 +5,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>在线抽签系统</title>
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-table.css">
 	<script type="text/javascript" src="js/lib/jquery-3.1.0.min.js"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap-table.js"></script>
 	<script type="text/javascript" src="js/lib/angular.min.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="css/table.css">
 </head>
 <body>
 	<!-- 头部 -->
@@ -96,7 +99,20 @@
 				<div class="dataArea">
 					<div class="data-title">文艺演出专家名单（共30人）</div>
 					<div class="data-table">
-						
+						<table id="dataTable">
+							<thead>
+						        <tr>
+						            <th>编号</th>
+						            <th>姓名</th>
+						            <th>单位</th>
+						            <th>专长</th>
+						            <th>职务</th>
+						        </tr>
+						    </thead>
+						    <tbody>
+
+						    </tbody>
+						</table>
 					</div>
 				</div>
 				<div class="resultArea">

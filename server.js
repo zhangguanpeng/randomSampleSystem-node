@@ -5,9 +5,9 @@ var xlsx = require("node-xlsx");
 var express = require('express');
 var app = express();
 
-var str='{"id":"123",name:"jack",arg:11111}';
+//var str='{"id":"123",name:"jack",arg:11111}';
 
-app.get('/', function (req, res) {
+app.get('/getdata', function (req, res) {
     //res.send('Hello GET');
     var dataArray = xlsx.parse("./data/testData.xlsx");
     //取sheet1中的数据，list是一个二维数组
@@ -16,10 +16,11 @@ app.get('/', function (req, res) {
     for(var i= 1;i<list.length;i++) {
         //console.log(list[i]);
         var rowObj = {};
-        rowObj.name = list[i][0];
-        rowObj.department = list[i][1];
-        rowObj.specialty = list[i][2];
-        rowObj.jobTitle = list[i][3];
+        rowObj.id = list[i][0]
+        rowObj.name = list[i][1];
+        rowObj.department = list[i][2];
+        rowObj.specialty = list[i][3];
+        rowObj.jobTitle = list[i][4];
         responseData.push(rowObj);
     }
     res.writeHead(200,{"Content-Type":'application/json','Access-Control-Allow-Origin':'*','Access-Control-Allow-Methods':'PUT,POST,GET,DELETE,OPTIONS'});
