@@ -1,4 +1,21 @@
 table {
 	width: 100%;
 	border: 1px solid #ccc;
+	font-family: "微软雅黑"
+}
+table th{
+	height: 30px;
+	font-size: 13px;
+	text-align: center;
+	border-left: 1px solid #ccc;
+}
+table td{
+	height: 25px;
+	font-size: 12px;
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	padding: 5px;
+}
+.even-tr{
+	background-color: #F2F2F2;
 }

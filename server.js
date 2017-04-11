@@ -16,11 +16,11 @@ app.get('/getdata', function (req, res) {
     for(var i= 1;i<list.length;i++) {
         //console.log(list[i]);
         var rowObj = {};
-        rowObj.id = list[i][0]
-        rowObj.name = list[i][1];
-        rowObj.department = list[i][2];
-        rowObj.specialty = list[i][3];
-        rowObj.jobTitle = list[i][4];
+        rowObj.id = i
+        rowObj.name = list[i][0];
+        rowObj.department = list[i][1];
+        rowObj.specialty = list[i][2];
+        rowObj.jobTitle = list[i][3];
         responseData.push(rowObj);
     }
     res.writeHead(200,{"Content-Type":'application/json','Access-Control-Allow-Origin':'*','Access-Control-Allow-Methods':'PUT,POST,GET,DELETE,OPTIONS'});

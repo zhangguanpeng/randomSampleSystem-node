@@ -23,11 +23,7 @@ $(document).ready(function() {
 		$.ajax({
 			url: 'http://127.0.0.1:8081/getdata',
 			type: 'GET',
-			//dataType: 'JSON',
 			success: function(data) {
-				console.log(data);
-				$("#content").empty();
-				//$("#content").text(data);
 				initTable(data);
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){
@@ -40,16 +36,20 @@ $(document).ready(function() {
 	}
 
 	function initTable(data) {
-		var trs = [];
-		for(var i=0;i<data.lenth;i++) {
-			var td1 = '<td>' + data[i].id + '</td>';
-			var td2 = '<td>' + data[i].name + '</td>';
-			var td3 = '<td>' + data[i].department + '</td>';
-			var td4 = '<td>' + data[i].specialty + '</td>';
-			var td5 = '<td>' + data[i].jobTitle + '</td>';
-			var tr = '<tr>' + td1 + td2 + td3 + td4 + td5 + '</tr>';
-			trs.push(tr);
+		$("#dataTable").empty();
+		var thead = "<tr><th>编号</th><th>姓名</th><th>单位</th><th>专长</th><th>职务</th></tr>";
+		var tbBody = "";
+		for(var i=0;i<data.length;i++) {
+			var trColor;
+	        if (i % 2 == 0) {
+	            trColor = "even-tr";
+	        }
+	        else {
+	            trColor = "odd-tr";
+	        }
+	        tbBody += "<tr class='" + trColor + "'><td>" + data[i].id + "</td>" + "<td>" + data[i].name + "</td>" + "<td>" + data[i].department + "</td>" + "<td>" + data[i].specialty + "</td>" + "<td>" + data[i].jobTitle + "</td></tr>";
 		}
-		$("#dataTable tbody").append(trs);
+		$("#dataTable").append(thead);
+		$("#dataTable").append(tbBody);
 	}
 });
