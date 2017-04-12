@@ -69,7 +69,7 @@ ul, li{
 	background-color: white;
 	overflow: hidden;
 	position: relative;
-	display: none;
+	display: block;
 }
 
 .nav-list>li .submenu:before{
@@ -121,6 +121,7 @@ ul, li{
 .home-title{
 	color: #4169E1;
 	font-family: '微软雅黑';
+	padding-left: 5px;
 }
 
 .content-title li a{
@@ -147,6 +148,10 @@ ul, li{
 	height: 35px;
 	line-height: 35px;
 	font-family: '微软雅黑';
+}
+
+.data-content{
+	overflow-y: hidden;
 }
 
 .search-title{

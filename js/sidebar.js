@@ -1,6 +1,6 @@
 /*左侧菜单折叠*/
 var $li = $(".sidebar li:has(ul)");
-var slideFlag = false;
+var slideFlag = true;
 $li.children("a").on("click", function() {
 	
 	if(slideFlag) {

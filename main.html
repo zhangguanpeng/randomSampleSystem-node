@@ -43,7 +43,7 @@
 					<a href="#">
 						<i class="glyphicon glyphicon-th-list"></i>
 						<span>项目汇总</span>
-						<b class="glyphicon glyphicon-menu-down"></b>
+						<b class="glyphicon glyphicon-menu-up"></b>
 					</a>
 					<ul class="submenu">
 						<li>
@@ -89,7 +89,7 @@
 				<ul>
 					<li>
 						<span class="glyphicon glyphicon-home"></span>
-						<span class="home-title"> &nbsp;首页</span>
+						<span class="home-title">首页</span>
 						<!-- <a href="#">管理员管理</a> -->
 					</li>
 				</ul>
@@ -97,30 +97,44 @@
 			<div id="content" class="content">
 				<!-- <h3>欢迎你！ admin</h3> -->
 				<div class="dataArea">
-					<div class="data-title">文艺演出专家名单（共30人）</div>
-					<div id="dataContent" class="data-table">
-						<table id="dataTable">
-							<!-- <thead>
-						        <tr>
-						            <th>编号</th>
-						            <th>姓名</th>
-						            <th>单位</th>
-						            <th>专长</th>
-						            <th>职务</th>
-						        </tr>
-						    </thead> -->
-						    
+					<div id="dataTitle" class="data-title">专家名单（共30人）</div>
+					<div id="dataContent" class="data-content">
+						<table id="dataTable_top">
+							<tr>
+								<th width="10%">编号</th>
+								<th width="10%">姓名</th>
+								<th width="30%">单位</th>
+								<th width="30%">专长</th>
+								<th width="20%">职务</th>
+							</tr>
 						</table>
+						<div id="dataTable_div" class="dataTable-div">
+								<table id="dataTable"></table>
+						</div>
 					</div>
 				</div>
 				<div class="resultArea">
-					<div class="search-title">文艺演出专家名单（共30人）</div>
-					<div class="data-table"></div>
+					<div class="search-title">专家名单（共30人）</div>
+					<div class="data-content">
+						<table id="resultTable_top">
+							<tr>
+								<th width="10%">编号</th>
+								<th width="10%">姓名</th>
+								<th width="30%">单位</th>
+								<th width="30%">专长</th>
+								<th width="20%">职务</th>
+							</tr>
+						</table>
+						<div id="resultTable_div">
+							<table id="resultTable"></table>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript" src="js/sidebar.js" ></script>
 	<script type="text/javascript" src="js/domAction.js"></script>
+	<script type="text/javascript" src="js/marquee.js"></script>
 </body>
 </html>

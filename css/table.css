@@ -1,21 +1,39 @@
-table {
+table{
 	width: 100%;
-	border: 1px solid #ccc;
-	font-family: "微软雅黑"
+	/*border: 1px solid #ccc;*/
+	font-family: "微软雅黑";
+	position: relative;
 }
 table th{
 	height: 30px;
 	font-size: 13px;
 	text-align: center;
 	border-left: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	background-color: lavender;
+}
+table th:nth-child(5){
+	border-right: 1px solid #ccc;
 }
 table td{
 	height: 25px;
 	font-size: 12px;
 	border-top: 1px solid #ccc;
 	border-left: 1px solid #ccc;
-	padding: 5px;
+	text-align: center;
+	/*padding: 5px;*/
 }
-.even-tr{
+
+table td:nth-child(5){
+	border-right: 1px solid #ccc;
+}
+
+.odd-tr{
 	background-color: #F2F2F2;
+}
+#data_first_tr{
+	/*position: fixed;*/
+}
+.dataTable-div{
+	overflow-y: hidden;
 }
