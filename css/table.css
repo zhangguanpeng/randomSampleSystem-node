@@ -27,6 +27,9 @@ table td{
 table td:nth-child(5){
 	border-right: 1px solid #ccc;
 }
+table tr:last-child{
+	border-bottom: 1px solid #ccc;
+}
 
 .odd-tr{
 	background-color: #F2F2F2;

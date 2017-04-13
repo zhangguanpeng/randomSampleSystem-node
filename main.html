@@ -114,8 +114,19 @@
 					</div>
 				</div>
 				<div class="resultArea">
-					<div class="search-title">专家名单（共30人）</div>
-					<div class="data-content">
+					<div class="search-title">
+						<form class="form-inline">
+						    <div class="form-group">
+						    	<input type="text" class="form-control" id="sampleNumber" placeholder="输入要抽取的值">
+						    </div>
+						    <button id="btn_getRandomData" class="btn btn-default">开始抽取</button>
+						    <div class="form-group">
+						    	<label>（已抽取：0人）</label>
+						    	<a href="#">PDF打印</a>
+						    </div>
+					    </form>
+					</div>
+					<div id="resultContent" class="data-content">
 						<table id="resultTable_top">
 							<tr>
 								<th width="10%">编号</th>
