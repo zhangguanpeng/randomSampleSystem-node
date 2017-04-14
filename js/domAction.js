@@ -30,11 +30,7 @@ $(document).ready(function() {
 	/*点击‘开始抽取’按钮触发*/
 	$("#btn_getRandomData").on('click', function() {
 		var randomNumber = $("#sampleNumber").val();
-		//alert(randomNumber);
 		var resultData = getArrayItems(sampleData, randomNumber);
-		//console.log(resultData);
-		//setInterval("console.log('haha')",1000);
-		//var int=setInterval("initResultTable(resultData)",1000)
 		initResultTable(resultData);
 	});
 
@@ -113,15 +109,9 @@ $(document).ready(function() {
 		$("#resultTable").empty();
 		var tbBody = "";
 		var trColor = "";
-		/*var trColor;
-		var i=0;
-		while (i<data.length) {
-			if(i == 0) {
-				trColor = "even-tr";
-				tbBody = "<tr id='tr" +i + "' class='" + trColor + "'><td width='10%'>" + data[i].id + "</td>" + "<td width='10%'>" + data[i].name + "</td>" + "<td width='30%'>" + data[i].department + "</td>" + "<td width='30%'>" + data[i].specialty + "</td>" + "<td width='20%'>" + data[i].jobTitle + "</td></tr>";
-				setTimeout(addTr1, 1000);
-				i++;
-			} else{
+		var i = 0;
+		var int = setInterval(function() {
+			if(i<data.length) {
 				if (i % 2 == 0) {
 		            trColor = "even-tr";
 		        }
@@ -129,45 +119,12 @@ $(document).ready(function() {
 		            trColor = "odd-tr";
 		        }
 		        tbBody = "<tr id='tr" +i + "' class='" + trColor + "'><td width='10%'>" + data[i].id + "</td>" + "<td width='10%'>" + data[i].name + "</td>" + "<td width='30%'>" + data[i].department + "</td>" + "<td width='30%'>" + data[i].specialty + "</td>" + "<td width='20%'>" + data[i].jobTitle + "</td></tr>";
-				setTimeout(addTr2, 1000);
-				i++;
+	        	$('#resultTable').append(tbBody);
+	        	i++;
+
 			}
-		}*/
+		}, 1000);
 		
-		for(var i=0;i<data.length;i++) {
-			(function(i) {
-		        if (i % 2 == 0) {
-		            trColor = "even-tr";
-		        }
-		        else {
-		            trColor = "odd-tr";
-		        }
-		        tbBody = "<tr id='tr" +i + "' class='" + trColor + "'><td width='10%'>" + data[i].id + "</td>" + "<td width='10%'>" + data[i].name + "</td>" + "<td width='30%'>" + data[i].department + "</td>" + "<td width='30%'>" + data[i].specialty + "</td>" + "<td width='20%'>" + data[i].jobTitle + "</td></tr>";
-	        	if(i == 0) {
-	        		setTimeout(function() {
-	        			$('#resultTable').append(tbBody);
-	        			//alert("i=0");
-	        			console.log($('#resultTable').html());
-	        		}, 1000);
-	        	}else {
-	        		setTimeout(function() {
-	        			$("#tr" + i-1).after(tbBody);
-	        			//alert("i!=0");
-	        			console.log($('#resultTable').html());
-	        		}, 1000);
-	        	}
-	  
-			})(i);
-		}
-		
-		/*function addTr1() {
-			debugger;
-			$('#resultTable').append(tbBody);
-		}
-		function addTr2() {
-			debugger;
-			$("#tr" + i-1).after(tbBody);
-		}*/
 	}
 
 });

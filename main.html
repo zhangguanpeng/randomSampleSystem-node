@@ -10,6 +10,8 @@
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap-table.js"></script>
 	<script type="text/javascript" src="js/lib/angular.min.js"></script>
+	<script type="text/javascript" src="js/lib/pdfmake.min.js"></script>
+	<script type="text/javascript" src="js/lib/vfs_fonts.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<link rel="stylesheet" type="text/css" href="css/table.css">
@@ -122,7 +124,7 @@
 						    <button id="btn_getRandomData" class="btn btn-default">开始抽取</button>
 						    <div class="form-group">
 						    	<label>（已抽取：0人）</label>
-						    	<a href="#">PDF打印</a>
+						    	<a id="printPDF" href="#">PDF打印</a>
 						    </div>
 					    </form>
 					</div>
@@ -147,5 +149,6 @@
 	<script type="text/javascript" src="js/sidebar.js" ></script>
 	<script type="text/javascript" src="js/domAction.js"></script>
 	<script type="text/javascript" src="js/marquee.js"></script>
+	<script type="text/javascript" src="js/makePDF.js"></script>
 </body>
 </html>
