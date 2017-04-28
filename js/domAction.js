@@ -7,12 +7,22 @@ $(document).ready(function() {
 	$("#resultContent").height(window_height - 155);
 	$("#dataTable_div").height(window_height - 190);
 	$("#resultTable_div").height(window_height - 190);
+	var clickOption = "";  //当前点击菜单选项
 	var sampleData = [];  //定义样本数据
 	var marquee;  //定义动画对象
+	var resultData = []; //定义随机抽取数据
+	pdfMake.fonts = {
+       	weiruanyahei: {
+ 	   	normal: 'msyh.ttf',
+       	bold: 'msyh.ttf',
+      	italics: 'msyh.ttf',
+      	bolditalics: 'msyh.ttf'
+	   }
+	};
 	/*点击左侧不同菜单触发执行不同的流程*/
 	$(".nav-list .submenu").on('click', 'a', function(){
 		$("#sampleNumber").val(''); //抽取表单致空
-		var clickOption = $(this).text();
+		clickOption = $(this).text();
 		switch (clickOption) {
 			case "文艺演出":
 				//alert("文艺演出");
@@ -30,8 +40,73 @@ $(document).ready(function() {
 	/*点击‘开始抽取’按钮触发*/
 	$("#btn_getRandomData").on('click', function() {
 		var randomNumber = $("#sampleNumber").val();
-		var resultData = getArrayItems(sampleData, randomNumber);
+		resultData = getArrayItems(sampleData, randomNumber);
+		console.log(resultData);
 		initResultTable(resultData);
+	});
+	/*点击‘PDF打印’触发*/
+	$("#printPDF").on('click', function() {
+		/*将抽取结果数据转换问表格格式的数据*/
+		var pdfData = [];
+		var headerRow = ["姓名", "单位", "专长", "职务"];
+		var dataRow = [];
+		pdfData.push(headerRow);
+		for(var i=0;i<resultData.length;i++) {
+			
+			
+			//debugger;
+			var temDataRow = function(n) {
+				dataRow[0] = resultData[n].name.toString(); 
+				dataRow[1] = resultData[n].department.toString();
+				dataRow[2] = resultData[n].specialty.toString();
+				dataRow[3] = resultData[n].jobTitle.toString();
+				return dataRow;
+			}(i);
+			pdfData.push(temDataRow);
+			//console.log(dataRow);
+		}
+		console.log(pdfData);
+		var docDefinition = { 
+			content: [
+			    // if you don't need styles, you can use a simple string to define a paragraph
+			    clickOption + '专家名单随机抽取结果',
+			    {
+					style: 'tableExample',
+					table: {
+						body: pdfData
+					},
+					layout: {
+						fillColor: function (i, node) { return (i % 2 === 0) ?  '#CCCCCC' : null; }
+					}
+				}
+			],
+			styles: {
+				header: {
+					fontSize: 18,
+					bold: true,
+					margin: [0, 0, 0, 10]
+				},
+				subheader: {
+					fontSize: 16,
+					bold: true,
+					margin: [0, 10, 0, 5]
+				},
+				tableExample: {
+					margin: [0, 5, 0, 15]
+				},
+				tableHeader: {
+					bold: true,
+					fontSize: 13,
+					color: 'black'
+				}
+			},
+			defaultStyle: {
+			    font: 'weiruanyahei'
+		    } 
+		};
+		pdfMake.createPdf(docDefinition).download();
+		//pdfMake.createPdf(docDefinition).open();
+		//pdfMake.createPdf(docDefinition).print();
 	});
 
 	function changeTitle(newTitle) {
