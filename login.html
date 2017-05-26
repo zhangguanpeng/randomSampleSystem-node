@@ -1,10 +1,28 @@
-<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html>
 <head>
-	<meta charset="utf-8">
-	<title>系统登录</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户登录</title>
+<link rel="stylesheet" type="text/css" href="css/login.css">
+<script type="text/javascript" src="js/lib/jquery-3.1.0.min.js"></script>
 </head>
 <body>
-
+<div class="tittle">
+	<h1>2017年北京市文化创意产业发展专项项目基金评审专家随机抽取系统</h1>
+</div>
+<div class="box">
+	<h2>用户登录</h2>
+    <div id="error_box"></div>
+    <div class="input_box">
+    	<input type="text" placeholder="请输入用户名" id="uname"/>
+    </div>
+    <div class="input_box">
+    	<input type="password" placeholder="请输入密码" id="upass"/>
+    </div>
+    <div class="input_box">
+    	<button onclick="fnLogin()">登&nbsp;&nbsp;录</button>
+    </div>
+</div>
+<div class="copyRight">版权所有 2016 - 2017 北京市文化创意产业发展专项项目</div>
+<script type="text/javascript" src="js/login.js"></script>
 </body>
 </html>

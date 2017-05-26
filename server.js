@@ -5,16 +5,18 @@ var xlsx = require("node-xlsx");
 var express = require('express');
 var app = express();
 
-//var str='{"id":"123",name:"jack",arg:11111}';
+//设置静态资源目录
+app.use(express.static('./'));
 
+//登录接口--暂时不写
+
+//获取数据的接口
 app.get('/getdata', function (req, res) {
-    //res.send('Hello GET');
     var dataArray = xlsx.parse("./data/testData.xlsx");
     //取sheet1中的数据，list是一个二维数组
     var list = dataArray[0].data;
     var responseData = [];
     for(var i= 1;i<list.length;i++) {
-        //console.log(list[i]);
         var rowObj = {};
         rowObj.id = i
         rowObj.name = list[i][0];
@@ -24,8 +26,6 @@ app.get('/getdata', function (req, res) {
         responseData.push(rowObj);
     }
     res.writeHead(200,{"Content-Type":'application/json','Access-Control-Allow-Origin':'*','Access-Control-Allow-Methods':'PUT,POST,GET,DELETE,OPTIONS'});
-
-    //res.json({data: dataList});
     res.end(JSON.stringify(responseData));
  
 });
