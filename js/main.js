@@ -19,6 +19,14 @@ $(document).ready(function() {
       	bolditalics: 'msyh.ttf'
 	   }
 	};
+	//console.log(getCookie("uname"));
+	var loginName = getCookie("uname");
+	var loginPwd = getCookie("upwd");
+	console.log(loginName + "and" + loginPwd);
+	if(loginName != "admin" || loginPwd != "666666") {
+		alert("请先登录！");
+		window.close();
+	}
 	/*点击左侧不同菜单触发执行不同的流程*/
 	$(".nav-list .submenu").on('click', 'a', function(){
 		$("#sampleNumber").val(''); //抽取表单致空
@@ -38,8 +46,10 @@ $(document).ready(function() {
 		}
 	});
 	/*点击‘开始抽取’按钮触发*/
-	$("#btn_getRandomData").on('click', function() {
+	$("#btn_getRandomData").on('click', function(e) {
+		e.preventDefault();
 		var randomNumber = $("#sampleNumber").val();
+		alert(randomNumber);
 		resultData = getArrayItems(sampleData, randomNumber);
 		console.log(resultData);
 		initResultTable(resultData);
@@ -108,6 +118,13 @@ $(document).ready(function() {
 		//pdfMake.createPdf(docDefinition).open();
 		//pdfMake.createPdf(docDefinition).print();
 	});
+	/*关闭当前页面时触发*/
+	/*$(window).bind("beforeunload", function() {
+		alert("关闭页面");
+		delCookie("uname");
+		delCookie("upwd");
+		return '您输入的内容尚未保存，确定离开此页面吗？';
+	});*/
 
 	function changeTitle(newTitle) {
 		$(".home-title").text(newTitle);
@@ -185,6 +202,7 @@ $(document).ready(function() {
 		var tbBody = "";
 		var trColor = "";
 		var i = 0;
+		var hasSelectedInfo = '';
 		var int = setInterval(function() {
 			if(i<data.length) {
 				if (i % 2 == 0) {
@@ -195,11 +213,29 @@ $(document).ready(function() {
 		        }
 		        tbBody = "<tr id='tr" +i + "' class='" + trColor + "'><td width='10%'>" + data[i].id + "</td>" + "<td width='10%'>" + data[i].name + "</td>" + "<td width='30%'>" + data[i].department + "</td>" + "<td width='30%'>" + data[i].specialty + "</td>" + "<td width='20%'>" + data[i].jobTitle + "</td></tr>";
 	        	$('#resultTable').append(tbBody);
+	        	var hasSelectedNum = i+1;
+	        	hasSelectedInfo = "（已抽取：" + hasSelectedNum + "人）";
+	        	$('#hasSelected').text(hasSelectedInfo);
 	        	i++;
 
 			}
 		}, 1000);
-		
+	}
+	/*读取cookies*/ 
+	function getCookie(name){ 
+	    var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+	    if(arr=document.cookie.match(reg))
+	        return unescape(arr[2]); 
+	    else 
+	        return null; 
+	} 
+	/*删除cookies*/ 
+	function delCookie(name) { 
+	    var exp = new Date(); 
+	    exp.setTime(exp.getTime() - 1); 
+	    var cval=getCookie(name); 
+	    if(cval!=null) 
+	        document.cookie= name + "="+cval+";expires="+exp.toGMTString(); 
 	}
 
 });

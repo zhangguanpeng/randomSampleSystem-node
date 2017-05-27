@@ -37,8 +37,18 @@ function fnLogin(){
 	}
 	if(oUname.value == username && oUpass.value == password) {
 		oError.innerHTML = "登录成功";
+		setCookie("uname", username);
+		setCookie("upwd", password);
 		window.location.href = 'main.html';
 		return;
 	}
 	oError.innerHTML = "登录用户名或密码错误成功";
 }
+
+//写cookies 
+function setCookie(name,value){ 
+    var Days = 1; //设置有效天数
+    var exp = new Date(); 
+    exp.setTime(exp.getTime() + Days*5*60*60*1000); //天，小时，分钟，秒，毫秒
+    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString(); 
+} 
