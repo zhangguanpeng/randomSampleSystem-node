@@ -16,6 +16,12 @@ ul, li{
 	}
 }
 
+::-webkit-scrollbar  
+{  
+    width: 6px;  
+    height: 16px;
+}
+
 
 /*页面主体部分*/
 .main-container{
@@ -142,6 +148,10 @@ ul, li{
 	border: 1px solid #ccc;
 	float: right;
 	padding: 5px;
+}
+
+.resultTable-div{
+	overflow: auto;
 }
 
 .data-title{

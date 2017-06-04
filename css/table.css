@@ -12,23 +12,21 @@ table th{
 	border-top: 1px solid #ccc;
 	background-color: lavender;
 }
-table th:nth-child(5){
+table th:last-child{
 	border-right: 1px solid #ccc;
 }
 table td{
 	height: 25px;
 	font-size: 12px;
-	border-top: 1px solid #ccc;
 	border-left: 1px solid #ccc;
 	text-align: center;
-	/*padding: 5px;*/
 }
 
-table td:nth-child(5){
+table td:last-child{
 	border-right: 1px solid #ccc;
 }
-table tr:last-child{
-	border-bottom: 1px solid #ccc;
+.resultTable-div table tr:last-child{
+	border-bottom: 1px solid #ccc; 
 }
 
 .odd-tr{

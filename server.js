@@ -12,17 +12,19 @@ app.use(express.static('./'));
 
 //获取数据的接口
 app.get('/getdata', function (req, res) {
-    var dataArray = xlsx.parse("./data/testData.xlsx");
+    console.log(req);
+    var dataArray = xlsx.parse("./data/wyyc.xlsx");
     //取sheet1中的数据，list是一个二维数组
     var list = dataArray[0].data;
     var responseData = [];
     for(var i= 1;i<list.length;i++) {
         var rowObj = {};
         rowObj.id = i
-        rowObj.name = list[i][0];
-        rowObj.department = list[i][1];
-        rowObj.specialty = list[i][2];
-        rowObj.jobTitle = list[i][3];
+        rowObj.name = list[i][1];
+        rowObj.department = list[i][3];
+        rowObj.specialty = list[i][4];
+        rowObj.jobTitle = list[i][5];
+        rowObj.mobile = list[i][2];
         responseData.push(rowObj);
     }
     res.writeHead(200,{"Content-Type":'application/json','Access-Control-Allow-Origin':'*','Access-Control-Allow-Methods':'PUT,POST,GET,DELETE,OPTIONS'});

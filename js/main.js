@@ -49,7 +49,7 @@ $(document).ready(function() {
 	$("#btn_getRandomData").on('click', function(e) {
 		e.preventDefault();
 		var randomNumber = $("#sampleNumber").val();
-		alert(randomNumber);
+		//alert(randomNumber);
 		resultData = getArrayItems(sampleData, randomNumber);
 		console.log(resultData);
 		initResultTable(resultData);
@@ -57,57 +57,101 @@ $(document).ready(function() {
 	/*点击‘PDF打印’触发*/
 	$("#printPDF").on('click', function() {
 		/*将抽取结果数据转换问表格格式的数据*/
+		var extractingTime = getNowFormatDate();
 		var pdfData = [];
-		var headerRow = ["姓名", "单位", "专长", "职务"];
+		var headerRow = ["编号", "专家姓名", "联系方式", "所在单位", "专业领域", "职务"];
 		var dataRow = [];
+		var temDataRow = [];
 		pdfData.push(headerRow);
 		for(var i=0;i<resultData.length;i++) {
-			
-			
+			dataRow.splice(0, dataRow.length);
 			//debugger;
-			var temDataRow = function(n) {
-				dataRow[0] = resultData[n].name.toString(); 
-				dataRow[1] = resultData[n].department.toString();
-				dataRow[2] = resultData[n].specialty.toString();
-				dataRow[3] = resultData[n].jobTitle.toString();
+			/*temDataRow = (function(n) {
+				dataRow.splice(0, dataRow.length);
+				dataRow[0] = n;
+				dataRow[1] = resultData[n].name.toString(); 
+				dataRow[2] = resultData[n].department.toString();
+				dataRow[3] = resultData[n].specialty.toString();
+				dataRow[4] = resultData[n].jobTitle.toString();
+				//console.log(dataRow);
 				return dataRow;
-			}(i);
-			pdfData.push(temDataRow);
+
+			})(i);*/
+			/*dataRow[0] = i;
+			dataRow[1] = resultData[i].name.toString(); 
+			dataRow[2] = resultData[i].department.toString();
+			dataRow[3] = resultData[i].specialty.toString();
+			dataRow[4] = resultData[i].jobTitle.toString();*/
+			//console.log(temDataRow);
+			dataRow.push(i);
+			dataRow.push(resultData[i].name);
+			dataRow.push(resultData[i].mobile);
+			dataRow.push(resultData[i].department);
+			dataRow.push(resultData[i].specialty);
+			dataRow.push(resultData[i].jobTitle);
+			//debugger;
+			pdfData.push(dataRow);
 			//console.log(dataRow);
 		}
+		//debugger;
 		console.log(pdfData);
 		var docDefinition = { 
 			content: [
 			    // if you don't need styles, you can use a simple string to define a paragraph
-			    clickOption + '专家名单随机抽取结果',
+			    {
+			    	text: '2017年北京市文化创意产业发展专项项目基金评审专家随机抽取系统',
+			    	style: 'header'
+			    },
+			    {
+			    	text: clickOption + '组  已抽取专家名单结果         （抽取时间：' + extractingTime + '）',
+			    	style: 'subheader'
+				},
 			    {
 					style: 'tableExample',
 					table: {
+						widths: [25, 40, 55, '*', 125, 120],
 						body: pdfData
 					},
 					layout: {
-						fillColor: function (i, node) { return (i % 2 === 0) ?  '#CCCCCC' : null; }
+						fillColor: function (i, node) { 
+							if(i == 0) {
+								return '#CCCCCC';
+							} else {
+								return null;
+							}
+						}
 					}
+				},
+				{
+					text: '现场人员签字：',
+					style: 'footer'
 				}
 			],
 			styles: {
 				header: {
-					fontSize: 18,
-					bold: true,
-					margin: [0, 0, 0, 10]
-				},
-				subheader: {
 					fontSize: 16,
 					bold: true,
-					margin: [0, 10, 0, 5]
+					margin: [0, 0, 0, 25],
+					alignment: 'center'
+				},
+				subheader: {
+					fontSize: 12,
+					bold: false,
+					margin: [0, 0, 0, 5],
 				},
 				tableExample: {
-					margin: [0, 5, 0, 15]
+					fontSize: 10,
+					bold: false
 				},
 				tableHeader: {
-					bold: true,
+					bold: false,
 					fontSize: 13,
 					color: 'black'
+				},
+				footer: {
+					fontSize: 12,
+					bold: false,
+					margin: [0, 10, 0, 0]
 				}
 			},
 			defaultStyle: {
@@ -142,6 +186,7 @@ $(document).ready(function() {
 			success: function(data) {
 				sampleData = data;
 				initTable(data);
+				updateTotalNumber(data.length);
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){
 			    var s1=XMLHttpRequest;
@@ -163,13 +208,13 @@ $(document).ready(function() {
 	        else {
 	            trColor = "odd-tr";
 	        }
-	        tbBody += "<tr class='" + trColor + "'><td width='10%'>" + data[i].id + "</td>" + "<td width='10%'>" + data[i].name + "</td>" + "<td width='30%'>" + data[i].department + "</td>" + "<td width='30%'>" + data[i].specialty + "</td>" + "<td width='20%'>" + data[i].jobTitle + "</td></tr>";
+	        tbBody += "<tr class='" + trColor + "'><td width='10%'>" + data[i].id + "</td>" + "<td width='10%'>" + data[i].name + "</td>" + "<td width='30%'>" + data[i].department + "</td>" + "<td width='25%'>" + data[i].specialty + "</td>" + "<td width='25%'>" + data[i].jobTitle + "</td></tr>";
 		}
 		$("#dataTable").append(tbBody);
-		if(marquee) {
+		/*if(marquee) {
 			return;
-		}
-		marquee = new Marquee({ ID: "dataTable_div", Direction: "top", Step: 2, Width: 0, Height: 500, Timer: 50, DelayTime: 0, WaitTime: 0, ScrollStep: 80  });
+		}*/
+		//marquee = new Marquee({ ID: "dataTable_div", Direction: "top", Step: 2, Width: 0, Height: 500, Timer: 50, DelayTime: 0, WaitTime: 0, ScrollStep: 80  });
 	}
 	/*随机抽取函数*/
 	function getArrayItems(arr, num) {
@@ -211,15 +256,19 @@ $(document).ready(function() {
 		        else {
 		            trColor = "odd-tr";
 		        }
-		        tbBody = "<tr id='tr" +i + "' class='" + trColor + "'><td width='10%'>" + data[i].id + "</td>" + "<td width='10%'>" + data[i].name + "</td>" + "<td width='30%'>" + data[i].department + "</td>" + "<td width='30%'>" + data[i].specialty + "</td>" + "<td width='20%'>" + data[i].jobTitle + "</td></tr>";
+		        tbBody = "<tr id='tr" +i + "' class='" + trColor + "'><td width='15%'>" + data[i].name + "</td>" + "<td width='35%'>" + data[i].department + "</td>" + "<td width='30%'>" + data[i].specialty + "</td>" + "<td width='20%'>" + data[i].jobTitle + "</td></tr>";
 	        	$('#resultTable').append(tbBody);
 	        	var hasSelectedNum = i+1;
 	        	hasSelectedInfo = "（已抽取：" + hasSelectedNum + "人）";
 	        	$('#hasSelected').text(hasSelectedInfo);
 	        	i++;
 
+			}else {
+				int=window.clearInterval(int)
+				alert("抽取完成");
 			}
 		}, 1000);
+		
 	}
 	/*读取cookies*/ 
 	function getCookie(name){ 
@@ -236,6 +285,24 @@ $(document).ready(function() {
 	    var cval=getCookie(name); 
 	    if(cval!=null) 
 	        document.cookie= name + "="+cval+";expires="+exp.toGMTString(); 
+	}
+	/*获取当前时间*/
+	function getNowFormatDate() {
+	    var date = new Date();
+	    var seperator1 = "-";
+	    var seperator2 = ":";
+	    var month = date.getMonth() + 1;
+	    var strDate = date.getDate();
+	    if (month >= 1 && month <= 9) {
+	        month = "0" + month;
+	    }
+	    if (strDate >= 0 && strDate <= 9) {
+	        strDate = "0" + strDate;
+	    }
+	    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+	            + " " + date.getHours() + seperator2 + date.getMinutes()
+	            + seperator2 + date.getSeconds();
+	    return currentdate;
 	}
 
 });
