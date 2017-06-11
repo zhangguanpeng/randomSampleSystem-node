@@ -9,6 +9,7 @@ $(document).ready(function() {
 	$("#resultTable_div").height(window_height - 190);
 	var clickOption = "";  //当前点击菜单选项
 	var sampleData = [];  //定义样本数据
+	var attachSampleData = []; //定义附加样本数据，用于增加权重
 	var marquee;  //定义动画对象
 	var resultData = []; //定义随机抽取数据
 	pdfMake.fonts = {
@@ -33,13 +34,12 @@ $(document).ready(function() {
 		clickOption = $(this).text();
 		switch (clickOption) {
 			case "文艺演出":
-				//alert("文艺演出");
 				changeTitle(clickOption);
-				getData("文艺演出");
+				getData("wyyc");
 				break;
 			case "新闻出版":
-				//alert("新闻出版");
 				changeTitle(clickOption);
+				getData("xwcb");
 				break;
 			default:
 				alert("其他");
@@ -50,8 +50,8 @@ $(document).ready(function() {
 		e.preventDefault();
 		var randomNumber = $("#sampleNumber").val();
 		//alert(randomNumber);
-		resultData = getArrayItems(sampleData, randomNumber);
-		console.log(resultData);
+		resultData = getArrayItems(sampleData, randomNumber, attachSampleData);
+		//console.log(resultData);
 		initResultTable(resultData);
 	});
 	/*点击‘PDF打印’触发*/
@@ -60,41 +60,24 @@ $(document).ready(function() {
 		var extractingTime = getNowFormatDate();
 		var pdfData = [];
 		var headerRow = ["编号", "专家姓名", "联系方式", "所在单位", "专业领域", "职务"];
-		var dataRow = [];
-		var temDataRow = [];
+		var dataRow;
+		var name, mobile, department, specialty, jobTitle;
 		pdfData.push(headerRow);
 		for(var i=0;i<resultData.length;i++) {
-			dataRow.splice(0, dataRow.length);
-			//debugger;
-			/*temDataRow = (function(n) {
-				dataRow.splice(0, dataRow.length);
-				dataRow[0] = n;
-				dataRow[1] = resultData[n].name.toString(); 
-				dataRow[2] = resultData[n].department.toString();
-				dataRow[3] = resultData[n].specialty.toString();
-				dataRow[4] = resultData[n].jobTitle.toString();
-				//console.log(dataRow);
-				return dataRow;
-
-			})(i);*/
-			/*dataRow[0] = i;
-			dataRow[1] = resultData[i].name.toString(); 
-			dataRow[2] = resultData[i].department.toString();
-			dataRow[3] = resultData[i].specialty.toString();
-			dataRow[4] = resultData[i].jobTitle.toString();*/
-			//console.log(temDataRow);
-			dataRow.push(i);
-			dataRow.push(resultData[i].name);
-			dataRow.push(resultData[i].mobile);
-			dataRow.push(resultData[i].department);
-			dataRow.push(resultData[i].specialty);
-			dataRow.push(resultData[i].jobTitle);
-			//debugger;
+			name = resultData[i].name ? resultData[i].name : "";
+			mobile = resultData[i].mobile ? resultData[i].mobile : "";
+	        department = resultData[i].department ? resultData[i].department : "";
+	        specialty = resultData[i].specialty ? resultData[i].specialty : "";
+	        jobTitle = resultData[i].jobTitle ? resultData[i].jobTitle : "";
+			dataRow = [];
+			dataRow.push(i+1);
+			dataRow.push(name);
+			dataRow.push(mobile);
+			dataRow.push(department);
+			dataRow.push(specialty);
+			dataRow.push(jobTitle);
 			pdfData.push(dataRow);
-			//console.log(dataRow);
 		}
-		//debugger;
-		console.log(pdfData);
 		var docDefinition = { 
 			content: [
 			    // if you don't need styles, you can use a simple string to define a paragraph
@@ -181,12 +164,14 @@ $(document).ready(function() {
 	/*获取数据*/
 	function getData(dataSourceName) {
 		$.ajax({
-			url: 'http://127.0.0.1:8081/getdata',
+			url: 'http://127.0.0.1:8081/getdata?dataSourceName='+dataSourceName,
 			type: 'GET',
 			success: function(data) {
-				sampleData = data;
-				initTable(data);
-				updateTotalNumber(data.length);
+				sampleData = data.mainData;
+				attachSampleData = data.attachData;
+				//console.log(data);
+				initTable(data.mainData);
+				updateTotalNumber(data.mainData.length);
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){
 			    var s1=XMLHttpRequest;
@@ -199,7 +184,9 @@ $(document).ready(function() {
 	/*创建数据源表格*/
 	function initTable(data) {
 		$("#dataTable").empty();
+		$("#resultTable").empty();
 		var tbBody = "";
+		var name, department, specialty, jobTitle;
 		for(var i=0;i<data.length;i++) {
 			var trColor;
 	        if (i % 2 == 0) {
@@ -208,7 +195,12 @@ $(document).ready(function() {
 	        else {
 	            trColor = "odd-tr";
 	        }
-	        tbBody += "<tr class='" + trColor + "'><td width='10%'>" + data[i].id + "</td>" + "<td width='10%'>" + data[i].name + "</td>" + "<td width='30%'>" + data[i].department + "</td>" + "<td width='25%'>" + data[i].specialty + "</td>" + "<td width='25%'>" + data[i].jobTitle + "</td></tr>";
+	        name = data[i].name ? data[i].name : "";
+	        department = data[i].department ? data[i].department : "";
+	        specialty = data[i].specialty ? data[i].specialty : "";
+	        jobTitle = data[i].jobTitle ? data[i].jobTitle : "";
+
+	        tbBody += "<tr class='" + trColor + "'><td width='10%'>" + data[i].id + "</td>" + "<td width='10%'>" + name + "</td>" + "<td width='30%'>" + department + "</td>" + "<td width='25%'>" + specialty + "</td>" + "<td width='25%'>" + jobTitle + "</td></tr>";
 		}
 		$("#dataTable").append(tbBody);
 		/*if(marquee) {
@@ -217,12 +209,15 @@ $(document).ready(function() {
 		//marquee = new Marquee({ ID: "dataTable_div", Direction: "top", Step: 2, Width: 0, Height: 500, Timer: 50, DelayTime: 0, WaitTime: 0, ScrollStep: 80  });
 	}
 	/*随机抽取函数*/
-	function getArrayItems(arr, num) {
+	function getArrayItems(arr, num, attachArr) {
 	    //新建一个数组,将传入的数组复制过来,用于运算,而不要直接操作传入的数组;
 	    var temp_array = new Array();
 	    for (var index in arr) {
 	        temp_array.push(arr[index]);
 	    }
+	    console.log(temp_array);
+	    temp_array.concat(attachArr);
+	    //console.log(arr);
 	    //取出的数值项,保存在此数组
 	    var return_array = new Array();
 	    for (var i = 0; i<num; i++) {
@@ -248,6 +243,7 @@ $(document).ready(function() {
 		var trColor = "";
 		var i = 0;
 		var hasSelectedInfo = '';
+		var name, department, specialty, jobTitle;
 		var int = setInterval(function() {
 			if(i<data.length) {
 				if (i % 2 == 0) {
@@ -256,7 +252,11 @@ $(document).ready(function() {
 		        else {
 		            trColor = "odd-tr";
 		        }
-		        tbBody = "<tr id='tr" +i + "' class='" + trColor + "'><td width='15%'>" + data[i].name + "</td>" + "<td width='35%'>" + data[i].department + "</td>" + "<td width='30%'>" + data[i].specialty + "</td>" + "<td width='20%'>" + data[i].jobTitle + "</td></tr>";
+		        name = data[i].name ? data[i].name : "";
+	        	department = data[i].department ? data[i].department : "";
+	        	specialty = data[i].specialty ? data[i].specialty : "";
+	        	jobTitle = data[i].jobTitle ? data[i].jobTitle : "";
+		        tbBody = "<tr id='tr" +i + "' class='" + trColor + "'><td width='15%'>" + name + "</td>" + "<td width='35%'>" + department + "</td>" + "<td width='30%'>" + specialty + "</td>" + "<td width='20%'>" + jobTitle + "</td></tr>";
 	        	$('#resultTable').append(tbBody);
 	        	var hasSelectedNum = i+1;
 	        	hasSelectedInfo = "（已抽取：" + hasSelectedNum + "人）";
