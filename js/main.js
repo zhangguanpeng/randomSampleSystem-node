@@ -212,23 +212,49 @@ $(document).ready(function() {
 	function getArrayItems(arr, num, attachArr) {
 	    //新建一个数组,将传入的数组复制过来,用于运算,而不要直接操作传入的数组;
 	    var temp_array = new Array();
-	    for (var index in arr) {
+	    /*var index;
+	    for (index in arr) {
 	        temp_array.push(arr[index]);
+	    }*/
+	    for(var i=0; i<arr.length; i++) {
+	    	//debugger;
+	    	temp_array.push(arr[i]);
 	    }
-	    console.log(temp_array);
-	    temp_array.concat(attachArr);
+	    //console.log(attachArr);
+	    //console.log(temp_array);
+
+	    var temp_array_attach = temp_array.concat(attachArr);
+	    //debugger;
 	    //console.log(arr);
+	    var isExistFlag = false;
 	    //取出的数值项,保存在此数组
 	    var return_array = new Array();
 	    for (var i = 0; i<num; i++) {
 	        //判断如果数组还有可以取出的元素,以防下标越界
-	        if (temp_array.length>0) {
+	        if (temp_array_attach.length>0) {
 	            //在数组中产生一个随机索引
-	            var arrIndex = Math.floor(Math.random()*temp_array.length);
-	            //将此随机索引的对应的数组元素值复制出来
-	            return_array[i] = temp_array[arrIndex];
-	            //然后删掉此索引的数组元素,这时候temp_array变为新的数组
-	            temp_array.splice(arrIndex, 1);
+	            var arrIndex = Math.floor(Math.random()*temp_array_attach.length);
+
+	            debugger;
+	            //如果返回的数组中已经存在当前项则跳出，继续下一步
+	            isExistFlag = isExist(return_array, temp_array_attach[arrIndex]);
+
+	            if(!isExistFlag) {
+	            	//将此随机索引的对应的数组元素值复制出来
+		            return_array[i] = temp_array_attach[arrIndex];
+		            //然后删掉此索引的数组元素,这时候temp_array变为新的数组
+		            temp_array_attach.splice(arrIndex, 1);
+	            }else {
+	            	//然后删掉此索引的数组元素,这时候temp_array变为新的数组
+	            	temp_array_attach.splice(arrIndex, 1);
+	            	i--;
+	            }
+	            
+            	//将此随机索引的对应的数组元素值复制出来
+	           // return_array[i] = temp_array_attach[arrIndex];
+	            
+	            
+	            
 	        } else {
 	            //数组中数据项取完后,退出循环,比如数组本来只有10项,但要求取出20项.
 	            break;
@@ -236,6 +262,19 @@ $(document).ready(function() {
 	    }
 	    return return_array;
 	}
+	/*判断当前数组中是否已经存在该元素*/
+	function isExist(arr, item) {
+		var isExistFlag = false;
+		for (var i=0;i<arr.length;i++) {
+			if(item.name == arr[i].name) {
+				isExistFlag = true;
+				break;
+			}
+		}
+		debugger;
+		return isExistFlag;
+	}
+
 	/*创建随机抽取结果表格*/
 	function initResultTable(data) {
 		$("#resultTable").empty();
