@@ -2,6 +2,7 @@ $(document).ready(function() {
 	var window_height = $(window).height();
 	//设置内容区域高度
 	$(".main-container").height(window_height - 55);
+	$("#welcomePage").height(window_height - 55 -40);
 	//设置表格区域高度
 	$("#dataContent").height(window_height - 155);
 	$("#resultContent").height(window_height - 155);
@@ -28,16 +29,19 @@ $(document).ready(function() {
 		alert("请先登录！");
 		window.close();
 	}
+	getNowDate();
 	/*点击左侧不同菜单触发执行不同的流程*/
 	$(".nav-list .submenu").on('click', 'a', function(){
 		$("#sampleNumber").val(''); //抽取表单致空
 		clickOption = $(this).text();
 		switch (clickOption) {
 			case "文艺演出":
+				closeWelcomePage();
 				changeTitle(clickOption);
 				getData("wyyc");
 				break;
 			case "新闻出版":
+				closeWelcomePage();
 				changeTitle(clickOption);
 				getData("xwcb");
 				break;
@@ -153,6 +157,26 @@ $(document).ready(function() {
 		return '您输入的内容尚未保存，确定离开此页面吗？';
 	});*/
 
+	/*$(".navbar-brand").on('click', function() {
+		$("#dataPage").hide();
+		$("#welcomePage").show();
+	});*/
+	/*获取当前日期*/
+	function getNowDate() {
+		var nowDate = new Date();
+		var year = nowDate.getFullYear();
+		var month = nowDate.getMonth() + 1;
+		var day = nowDate.getDate();
+		var today = year + '年' + month + '月' + day + '日';
+		$("#nowDate").text(today);
+	}
+
+	/*关闭欢迎页打开收取页*/
+	function closeWelcomePage() {
+		$("#welcomePage").hide();
+		$("#dataPage").show();
+	}
+
 	function changeTitle(newTitle) {
 		$(".home-title").text(newTitle);
 	}
@@ -234,8 +258,6 @@ $(document).ready(function() {
 	        if (temp_array_attach.length>0) {
 	            //在数组中产生一个随机索引
 	            var arrIndex = Math.floor(Math.random()*temp_array_attach.length);
-
-	            debugger;
 	            //如果返回的数组中已经存在当前项则跳出，继续下一步
 	            isExistFlag = isExist(return_array, temp_array_attach[arrIndex]);
 
@@ -271,7 +293,6 @@ $(document).ready(function() {
 				break;
 			}
 		}
-		debugger;
 		return isExistFlag;
 	}
 
