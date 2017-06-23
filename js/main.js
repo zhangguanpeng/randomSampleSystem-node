@@ -45,8 +45,53 @@ $(document).ready(function() {
 				changeTitle(clickOption);
 				getData("xwcb");
 				break;
+			case "广播影视":
+				closeWelcomePage();
+				changeTitle(clickOption);
+				getData("gbys");
+				break;
+			case "动漫网游":
+				closeWelcomePage();
+				changeTitle(clickOption);
+				getData("dmwy");
+				break;
+			case "文化会展":
+				closeWelcomePage();
+				changeTitle(clickOption);
+				getData("whhz");
+				break;
+			case "设计服务":
+				closeWelcomePage();
+				changeTitle(clickOption);
+				getData("sjfw");
+				break;
+			case "艺术品交易":
+				closeWelcomePage();
+				changeTitle(clickOption);
+				getData("gwys");
+				break;
+			case "广告产业":
+				closeWelcomePage();
+				changeTitle(clickOption);
+				getData("ggcy");
+				break;
+			case "综合产业":
+				closeWelcomePage();
+				changeTitle(clickOption);
+				getData("zhcy");
+				break;
+			case "信息化":
+				closeWelcomePage();
+				changeTitle(clickOption);
+				getData("xxh");
+				break;
+			case "财务":
+				closeWelcomePage();
+				changeTitle(clickOption);
+				getData("cw");
+				break;
 			default:
-				alert("其他");
+				alert("没有该选中项");
 		}
 	});
 	/*点击‘开始抽取’按钮触发*/
