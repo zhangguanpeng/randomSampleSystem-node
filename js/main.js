@@ -11,7 +11,7 @@ $(document).ready(function() {
 	var clickOption = "";  //当前点击菜单选项
 	var sampleData = [];  //定义样本数据
 	var attachSampleData = []; //定义附加样本数据，用于增加权重
-	var marquee;  //定义动画对象
+	
 	var resultData = []; //定义随机抽取数据
 	pdfMake.fonts = {
        	weiruanyahei: {
@@ -27,9 +27,22 @@ $(document).ready(function() {
 	console.log(loginName + "and" + loginPwd);
 	if(loginName != "admin" || loginPwd != "666666") {
 		alert("请先登录！");
-		window.close();
+		//window.close();
+		closeWindows();
 	}
 	getNowDate();
+	/*退出登录*/
+	$("#quit").on('click', function(){
+		var quitInfo = confirm("确定要退出系统吗？");
+		if(quitInfo) {
+			delCookie("uname");
+			delCookie("upwd");
+			//window.close();
+			closeWindows();
+		}else {
+			return;
+		}
+	});
 	/*点击左侧不同菜单触发执行不同的流程*/
 	$(".nav-list .submenu").on('click', 'a', function(){
 		$("#sampleNumber").val(''); //抽取表单致空
@@ -252,6 +265,7 @@ $(document).ready(function() {
 	}
 	/*创建数据源表格*/
 	function initTable(data) {
+		var marquee;  //定义动画对象
 		$("#dataTable").empty();
 		$("#resultTable").empty();
 		var tbBody = "";
@@ -409,5 +423,46 @@ $(document).ready(function() {
 	            + seperator2 + date.getSeconds();
 	    return currentdate;
 	}
+	/*关闭当前窗口*/
+	function closeWindows() {
+        var browserName = navigator.appName;
+        var browserVer = parseInt(navigator.appVersion);
+        //alert(browserName + " : "+browserVer);
+        //document.getElementById("flashContent").innerHTML = "<br>&nbsp;<font face='Arial' color='blue' size='2'><b> You have been logged out of the Game. Please Close Your Browser Window.</b></font>";
+
+        if(browserName == "Microsoft Internet Explorer"){
+            var ie7 = (document.all && !window.opera && window.XMLHttpRequest) ? true : false;  
+            if (ie7){  
+               //This method is required to close a window without any prompt for IE7 & greater versions.
+               window.open('','_parent','');
+               window.close();
+            }else{
+               //This method is required to close a window without any prompt for IE6
+               this.focus();
+               self.opener = this;
+               self.close();
+            }
+        }else{  
+            //For NON-IE Browsers except Firefox which doesnt support Auto Close
+            try{
+                this.focus();
+                self.opener = this;
+                self.close();
+            }
+            catch(e){
+
+            }
+            try{
+            	window.opener = null;
+                window.open(' ','_self');
+                window.close();
+            }
+            catch(e){
+
+            }
+        }
+    }
+
+	$("#dataTable_div").rollNoInterval().top();
 
 });

@@ -129,8 +129,8 @@
     };
     $.fn.rollNoInterval = function(){
         var $self = this,
-            $ul = $self.find('.roll__list'),
-            $item = $ul.find('li'),
+            $ul = $self.find('#dataTable'),
+            $item = $ul.find('tr'),
             len = $item.length,
             timer,
             left = function(){
@@ -197,10 +197,10 @@
                         $sliceItem.detach();
                         $ul.css('top', 0);
                         $ul.append($sliceItem);
-                        $sliceItem = $($ul.find('li')[0]);
+                        $sliceItem = $($ul.find('tr')[0]);
                         range = $sliceItem.outerHeight(true);
                     }
-                }, 50);
+                }, 60);
             },
             bottom = function(){
                 var offset, i,
@@ -227,13 +227,14 @@
             },
             init = function(){
                 $self.hover(function(){
+                    //console.log("鼠标上来了");
                     clearInterval(timer);
                 }, function(){
-
+                    top();
                 });
             };
 
-        //init();
+        init();
         return {
             left: left,
             right: right,
