@@ -13,6 +13,7 @@ $(document).ready(function() {
 	var attachSampleData = []; //定义附加样本数据，用于增加权重
 	
 	var resultData = []; //定义随机抽取数据
+	var scrollToTop = $("#dataTable_div").rollNoInterval().top;
 	pdfMake.fonts = {
        	weiruanyahei: {
  	   	normal: 'msyh.ttf',
@@ -28,7 +29,8 @@ $(document).ready(function() {
 	if(loginName != "admin" || loginPwd != "666666") {
 		alert("请先登录！");
 		//window.close();
-		closeWindows();
+		//closeWindows();
+		window.location.href = 'login.html';
 	}
 	getNowDate();
 	/*退出登录*/
@@ -38,7 +40,8 @@ $(document).ready(function() {
 			delCookie("uname");
 			delCookie("upwd");
 			//window.close();
-			closeWindows();
+			//closeWindows();
+			window.location.href = 'login.html';
 		}else {
 			return;
 		}
@@ -52,56 +55,67 @@ $(document).ready(function() {
 				closeWelcomePage();
 				changeTitle(clickOption);
 				getData("wyyc");
+				scrollToTop();
 				break;
 			case "新闻出版":
 				closeWelcomePage();
 				changeTitle(clickOption);
 				getData("xwcb");
+				scrollToTop();
 				break;
 			case "广播影视":
 				closeWelcomePage();
 				changeTitle(clickOption);
 				getData("gbys");
+				scrollToTop();
 				break;
 			case "动漫网游":
 				closeWelcomePage();
 				changeTitle(clickOption);
 				getData("dmwy");
+				scrollToTop();
 				break;
 			case "文化会展":
 				closeWelcomePage();
 				changeTitle(clickOption);
 				getData("whhz");
+				scrollToTop();
 				break;
 			case "设计服务":
 				closeWelcomePage();
 				changeTitle(clickOption);
 				getData("sjfw");
+				scrollToTop();
 				break;
 			case "艺术品交易":
 				closeWelcomePage();
 				changeTitle(clickOption);
 				getData("gwys");
+				scrollToTop();
 				break;
 			case "广告产业":
 				closeWelcomePage();
 				changeTitle(clickOption);
+				scrollToTop();
 				getData("ggcy");
 				break;
 			case "综合产业":
 				closeWelcomePage();
 				changeTitle(clickOption);
 				getData("zhcy");
+				scrollToTop();
 				break;
 			case "信息化":
 				closeWelcomePage();
 				changeTitle(clickOption);
 				getData("xxh");
+				scrollToTop();
 				break;
 			case "财务":
 				closeWelcomePage();
 				changeTitle(clickOption);
 				getData("cw");
+				scrollToTop();
 				break;
 			default:
 				alert("没有该选中项");
@@ -463,6 +477,7 @@ $(document).ready(function() {
         }
     }
 
-	$("#dataTable_div").rollNoInterval().top();
+	
+	
 
 });

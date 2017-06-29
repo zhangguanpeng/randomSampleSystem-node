@@ -131,7 +131,9 @@
         var $self = this,
             $ul = $self.find('#dataTable'),
             $item = $ul.find('tr'),
-            len = $item.length,
+            len = $item.length,offset, i,
+                    range,
+                    $sliceItem,
             timer,
             left = function(){
                 var offset, i,
@@ -180,13 +182,22 @@
                 }, 50);
             },
             top = function(){
-                var offset, i,
-                    range,
-                    $sliceItem;
-
+                //var 
+                //debugger;
+                if(timer) {
+                    clearInterval(timer);
+                }
                 $sliceItem = $($item[0]);
                 range = $sliceItem.outerHeight(true);
                 timer = setInterval(function(){
+                    /*var sf = scrollFlag;
+                    if(sf) {
+                        offset = 0;
+                        sf = false;
+                    }else {
+                        offset = $ul.css('top');
+                        offset = parseInt(offset);
+                    }*/
                     offset = $ul.css('top');
                     offset = parseInt(offset);
                     if(offset > -range){
@@ -200,7 +211,7 @@
                         $sliceItem = $($ul.find('tr')[0]);
                         range = $sliceItem.outerHeight(true);
                     }
-                }, 60);
+                }, 30);
             },
             bottom = function(){
                 var offset, i,
