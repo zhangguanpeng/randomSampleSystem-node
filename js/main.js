@@ -251,6 +251,7 @@ $(document).ready(function() {
 
 	function changeTitle(newTitle) {
 		$(".home-title").text(newTitle);
+		$("#hasSelected").text("（已抽取：0人）");
 	}
 	/*更新数据表格人数*/
 	function updateTotalNumber(totalNumber) {
