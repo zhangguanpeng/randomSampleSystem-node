@@ -117,6 +117,12 @@ $(document).ready(function() {
 				getData("cw");
 				scrollToTop();
 				break;
+			case "金融投资":
+				closeWelcomePage();
+				changeTitle(clickOption);
+				getData("jrtz");
+				scrollToTop();
+				break;
 			default:
 				alert("没有该选中项");
 		}
@@ -372,6 +378,7 @@ $(document).ready(function() {
 
 	/*创建随机抽取结果表格*/
 	function initResultTable(data) {
+		console.log(data);
 		$("#resultTable").empty();
 		var tbBody = "";
 		var trColor = "";
