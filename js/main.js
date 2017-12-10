@@ -99,7 +99,7 @@ $(document).ready(function() {
 				scrollToTop();
 				getData("ggcy");
 				break;
-			case "综合产业":
+			case "行业综合":
 				closeWelcomePage();
 				changeTitle(clickOption);
 				getData("zhcy");
@@ -164,11 +164,11 @@ $(document).ready(function() {
 			content: [
 			    // if you don't need styles, you can use a simple string to define a paragraph
 			    {
-			    	text: '2017年北京市文化创意产业发展专项项目基金评审专家随机抽取系统',
+			    	text: '2017年北京市文化创意产业“投贷奖”支持资金评审专家随机抽取系统',
 			    	style: 'header'
 			    },
 			    {
-			    	text: clickOption + '组  已抽取专家名单结果         （抽取时间：' + extractingTime + '）',
+			    	text: clickOption + '类  已抽取专家名单结果         （抽取时间：' + extractingTime + '）',
 			    	style: 'subheader'
 				},
 			    {
